@@ -1,0 +1,33 @@
+-- 1. Create staging table for CSV load
+CREATE TABLE IF NOT EXISTS staging.sample_customers (
+  CustomerID INT,
+  CustomerName VARCHAR(100),
+  JoinDate VARCHAR(10),
+  Status VARCHAR(20)
+);
+
+-- 2. Bulk load from CSV
+COPY staging.sample_customers(CustomerID, CustomerName, JoinDate, Status)
+FROM 'docs/sample_customers.csv'
+DELIMITER ',' CSV HEADER;
+
+-- 3. Create target table
+CREATE TABLE IF NOT EXISTS crm.customers (
+  CustomerID INT PRIMARY KEY,
+  CustomerName VARCHAR(100),
+  JoinDate DATE,
+  Status VARCHAR(20)
+);
+
+-- 4. Transform & insert into target
+INSERT INTO crm.customers (CustomerID, CustomerName, JoinDate, Status)
+SELECT
+  CustomerID,
+  CustomerName,
+  TO_DATE(JoinDate, 'YYYY-MM-DD'),
+  Status
+FROM staging.sample_customers;
+
+-- 5. Verification query
+SELECT *
+FROM crm.customers;
