@@ -1,0 +1,9 @@
+Business Requirements Document (BRD)
+
+Goal: Load customer data into crm.customers with zero data loss.
+
+Stakeholders: Sales, IT.
+
+Scope: 5 customer records (ID, Name, JoinDate, Status).
+
+Constraints: Data arrives as CSV, only date parsing required.
