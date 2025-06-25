@@ -1,0 +1,13 @@
+# UAT Test Cases
+
+## UAT1: Successful Load
+1. Run `migrate_customers.sql`.
+2. Verify that `crm.customers` returns 5 rows matching the CSV data.
+
+*Expected:* All five records present with correct dates and status.
+
+## UAT2: Duplicate ID Handling
+1. Edit `docs/sample_customers.csv` to set two rows with `CustomerID=1`.
+2. Run `migrate_customers.sql`.
+
+*Expected:* Primary key violation error; only the first valid record loads, and error logged (or script fails gracefully).
