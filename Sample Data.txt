@@ -1,0 +1,6 @@
+CustomerID,CustomerName,JoinDate,Status
+1,Alice Smith,2025-01-15,Active
+2,Bob Jones,2025-01-20,Active
+3,Carol Lee,2025-02-05,Inactive
+4,David Kim,2025-02-10,Active
+5,Eva Patel,2025-02-15,Pending
